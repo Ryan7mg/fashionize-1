@@ -3,28 +3,31 @@
 {% block title %}Signup{% endblock %}
 
 {% block content %}
-<div class="container mt-5">
-    <h2 class="mb-4">Signup</h2>
-    <form method="post" class="needs-validation" novalidate>
-        {% csrf_token %}
-        <div class="mb-3">
-            <label for="username" class="form-label">Username:</label>
-            <input type="text" class="form-control" name="username" id="username" required>
-            <div class="invalid-feedback">
-                Please choose a username.
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4">
+            <div class="form">
+                <h2 class="text-center">Create an account</h2>
+                <p class="text-center">Join the Fashionize Community.</p>
+                <form class="w-100" method="post"> <!-- Adjusted class to w-100 for full width within the div -->
+                    {% csrf_token %}
+                    <div class="form-group mb-3">
+                        <label class="form-label" for="username">Username:</label>
+                        <input class="form-control" type="text" name="username" id="username" placeholder="Choose your username" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label" for="password">Password:</label>
+                        <input class="form-control" type="password" name="password" id="password" placeholder="Create a password" required>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary w-100" type="submit">Signup</button>
+                    </div>
+                </form>
+                {% if error %}
+                <p class="text-danger">{{ error }}</p>
+                {% endif %}
             </div>
         </div>
-        <div class="mb-3">
-            <label for="password" class="form-label">Password:</label>
-            <input type="password" class="form-control" name="password" id="password" required>
-            <div class="invalid-feedback">
-                Please enter a password.
-            </div>
-        </div>
-        <button type="submit" class="btn btn-primary">Signup</button>
-    </form>
-    {% if error %}
-        <p class="text-danger">{{ error }}</p>
-    {% endif %}
+    </div>
 </div>
 {% endblock %}

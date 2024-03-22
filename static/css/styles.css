@@ -1,0 +1,126 @@
+:root {
+    --font-primary: 'Inter', sans-serif;
+    --font-secondary: 'Open Sans', sans-serif;
+}
+
+/* ----- Base styles ----- */
+body {
+    font-family: var(--font-primary);
+    font-weight: 250; 
+    font-size: 1rem; 
+    line-height: 1.5;
+    color: #333; 
+}
+
+h1, h2 {
+    font-family: var(--font-primary);
+    color: #333;
+}
+
+
+/* Button styling */
+
+.btn{
+  border-radius: 15px
+}
+
+
+.btn--primary {
+    background-color: #000000; 
+    color: #ead4d4; 
+    
+}
+
+.btn--secondary {
+    background-color: #ffffff; 
+    border-color: #000000; 
+    color: #000000; 
+
+}
+
+
+.button--primary:hover, .button--secondary:hover {
+    background-color: #333333;
+    border-color: #333333;
+}
+
+/* ----- Home Page ----- */
+
+/* home background image */
+.home{
+  background: url(../images/home.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh; 
+  padding-top: 77.19px;
+
+}
+
+
+/* Forms */
+
+.form{
+        background-color: #fff; 
+        padding: 20px;
+        border-radius: 15px; 
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+        margin-top: 50%; 
+    }
+
+/* custom.css */
+
+/* Input fields styling */
+.form-control {
+    background-color: #ffffff; 
+    border: 1px solid #D0D5DD; 
+    color: #000000; 
+    border-radius: 8px
+}
+
+
+
+
+/* navbar */
+.navbar{
+  --bs-navbar-padding-y: 1.1rem;
+  position: fixed;
+  width: 100%;
+
+}
+
+.nav__btn {
+  width: 10rem;
+  margin-right: 20px;
+  border: 1px solid #000000;     
+}
+
+
+
+/* small screen sizes navbar logged out*/
+@media (min-width: 730px){
+  .logged-out .navbar-expand-lg .navbar-toggler .navbar--logged-out{
+      display: none;
+  }
+
+  .navbar-expand-lg .navbar-nav .nav--logged-out{
+    flex-direction: row;
+  }
+
+  .logged-out .navbar-expand-lg .navbar-collapse .nav--logged-out {
+      display: flex!important;
+      flex-basis: auto;
+  }
+
+}
+
+@media (max-width: 730px){
+   .nav__btn {
+    margin-top: 1rem;
+    width: auto;
+  }
+}
+
+/* navbar user icon */
+.material-symbols-outlined {
+  color: #000000;
+}
