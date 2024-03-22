@@ -1,0 +1,8 @@
+<ul>
+    {% for clothing in clothings %}
+    <li class="clothing-item" data-clothing-id="{{ clothing.id }}">{{ clothing.name }} - {{ clothing.type }}</li>
+    {% empty %}
+    <li>No {{ type_name }} added yet.</li>
+    {% endfor %}
+</ul>
+

@@ -1,0 +1,9 @@
+/* 自定义样式 */
+.card-custom {
+    min-height: 200px; /* 或者你想要的任何固定高度 */
+}
+
+.card-img-top-fit {
+    height: 150px; /* 图片的固定高度 */
+    object-fit: contain; /* 裁剪图片以适应卡片 */
+}

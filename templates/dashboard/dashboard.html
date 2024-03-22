@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock %}
+{% block title %}Dashboard - {{ username }}{% endblock %}
+
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Welcome to Your Dashboard, {{ username }}!</h1>
+    <p>This is your personalized dashboard where you can access all your favorite features.</p>
+
+    <!-- 使用 Bootstrap 卡片和网格布局 -->
+    <div class="row">
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100">
+                <div class="card-header">
+                    What's New?
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <h5 class="card-title">Recent Fashion News</h5>
+                        {% if recent_news %}
+                        {% for article in fashion_news %}
+                        <div>
+                            <a href="{{ article.url }}" target="_blank" class="news-title">{{ article.title }}</a>
+                            <p class="news-date">{{ article.publishedAt|date:"Y-m-d H:i" }}</p>
+                            <p>{{ article.description }}</p>
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        <p>No recent fashion news available.</p>
+                        {% endif %}
+                    </li>
+                    <li class="list-group-item">
+                        <h5 class="card-title">What's on SALE</h5>
+                        <p>No recent sales available.</p>
+                    </li>
+                    <li class="list-group-item">
+                        <h5 class="card-title">New coming</h5>
+                        <p>No recent clothing available.</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- 重复相似结构用于 Discount Info 和 New Products -->
+    </div>
+
+     <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">Recently Added Clothings</div>
+                <div class="card-body">
+                    <div class="row">
+                        {% for clothing in recent_clothings %}
+                        <div class="col-6 col-md-4 col-lg-2 mb-3"> <!-- 调整列宽以适应不同屏幕 -->
+                            <div class="card h-100">
+                                <img src="{{ clothing.photo.url }}" alt="{{ clothing.name }}" class="card-img-top card-img-top-fit img-fluid"/>
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ clothing.name }}</h5>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">Recently Added Outfits</div>
+                <div class="card-body">
+                    <div class="row">
+                        {% for outfit in recent_outfits %}
+                        <div class="col-6 col-md-4 col-lg-2 mb-3"> <!-- 调整列宽以适应不同屏幕 -->
+                            <div class="card h-100">
+                                <img src="{{ outfit.image.url }}" alt="{{ outfit.name }}" class="card-img-top img-fluid"/>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

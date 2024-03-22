@@ -1,0 +1,81 @@
+.outfit-creation-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* 添加响应式支持 */
+}
+
+.clothing-selection {
+    flex: 1 1 auto; /* 调整以支持响应式布局 */
+    padding: 20px;
+    max-width: calc(50% - 20px); /* 控制最大宽度，同时允许一些间距 */
+}
+
+.clothing-grid {
+    border: 2px solid black;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer; /* 添加鼠标指针变化，明确这是可点击的 */
+}
+
+.clothing-grid.top,
+.clothing-grid.bottom,
+.clothing-grid.shoe {
+    width: 100%; /* 调整宽度为100%，以适应父容器 */
+    max-width: 200px; /* 控制最大宽度 */
+}
+
+.clothing-grid.shoe {
+    height: 100px;
+}
+
+.outfit-details {
+    flex: 1 1 auto;
+    padding: 20px;
+    max-width: calc(50% - 20px); /* 控制最大宽度，同时允许一些间距 */
+}
+
+.outfit-details form {
+    display: flex;
+    flex-direction: column;
+}
+
+.outfit-details button {
+    margin-top: 20px;
+    align-self: flex-start; /* 使按钮对齐到表单的起始位置 */
+}
+
+/* 添加一些媒体查询以优化小屏幕上的显示 */
+@media (max-width: 768px) {
+    .outfit-creation-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .clothing-selection,
+    .outfit-details {
+        max-width: 100%; /* 小屏幕上宽度调整为100% */
+    }
+}
+
+
+
+.clothing-selection .clothing-grid {
+    border: 1px solid #ccc;
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+}
+
+.clothing-grid.top {
+    height: 200px;
+}
+
+.clothing-grid.bottom {
+    height: 200px;
+}
+
+.clothing-grid.shoe {
+    height: 100px;
+}

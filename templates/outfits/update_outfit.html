@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/update_outfit.css' %}">
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'javascript/update_outfit.js' %}"></script>
+<script>
+    const username = "{{ request.user.username }}";
+    const selectedTopImageUrl = "{{ outfit.top.image.url|default_if_none:'' }}";
+    const selectedBottomImageUrl = "{{ outfit.bottom.image.url|default_if_none:'' }}";
+    const selectedShoeImageUrl = "{{ outfit.shoe.image.url|default_if_none:'' }}";
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 clothing-selection">
+            <div class="mb-3" data-type="top" onclick="openSelectionModal('top')">
+                <div class="clothing-grid top" style="background-image: url('{{selectedTopImageUrl}}');"></div>
+                Top Selection Area
+            </div>
+            <div class="mb-3" data-type="bottom" onclick="openSelectionModal('bottom')">
+                <div class="clothing-grid bottom" style="background-image: url('{{selectedBottomImageUrl}}');"></div>
+                Bottom Selection Area
+            </div>
+            <div class="mb-3" data-type="shoe" onclick="openSelectionModal('shoe')">
+                <div class="clothing-grid shoe" style="background-image: url('{{selectedShoeImageUrl}}');"></div>
+                Shoe Selection Area
+            </div>
+        </div>
+        <div class="col-md-6 outfit-details">
+            <form method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="id_name" class="form-label">Name:</label>
+                    {{ form.name|add_class:"form-control" }}
+                </div>
+                <div class="mb-3">
+                    <label for="id_image" class="form-label">Image:</label>
+                    {{ form.image|add_class:"form-control" }}
+                </div>
+                <div class="d-none">
+                    {{ form.top }}
+                    {{ form.bottom }}
+                    {{ form.shoe }}
+                </div>
+                <button type="submit" class="btn btn-primary">Update Outfit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="clothing-selection-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Select Clothing Item</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="clothing-selection-content"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

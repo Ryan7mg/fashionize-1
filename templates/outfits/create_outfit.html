@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/create_outfit.css' %}">
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'javascript/create_outfit.js' %}"></script>
+<script>
+    const username = "{{ request.user.username }}";
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="clothing-selection mb-3">
+                <div class="clothing-grid top" data-type="top" onclick="openSelectionModal('top')">Top Selection Area</div>
+                <div class="clothing-grid bottom" data-type="bottom" onclick="openSelectionModal('bottom')">Bottom Selection Area</div>
+                <div class="clothing-grid shoe" data-type="shoe" onclick="openSelectionModal('shoe')">Shoe Selection Area</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="outfit-details">
+                <form method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="id_name" class="form-label">Name:</label>
+                        {{ form.name|add_class:"form-control" }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_image" class="form-label">Photo:</label>
+                        {{ form.image|add_class:"form-control" }}
+                    </div>
+                    <div class="d-none">
+                        {{ form.top }}
+                        {{ form.bottom }}
+                        {{ form.shoe }}
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create Outfit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 模态框用于衣物选择 -->
+<div class="modal fade" id="clothing-selection-modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel">Select Clothing Item</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="clothing-selection-content"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

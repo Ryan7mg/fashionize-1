@@ -1,0 +1,17 @@
+ .card-img-top {
+            object-fit: contain; /* 让图片覆盖整个可用空间，但可能会被裁剪 */
+            height: 400px; /* 设置图片的高度 */
+        }
+
+  /* 针对卡片底部按钮的样式 */
+        .card-body {
+            padding: 0.5rem; /* 根据需要设置内间距 */
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 设置按钮的宽度以及顶部边距 */
+        .card-body > .btn {
+            width: auto; /* 使用自动宽度 */
+            margin-top: 0.5rem; /* 在按钮顶部添加一些间距 */
+        }

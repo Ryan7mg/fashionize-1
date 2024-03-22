@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+{% load static %}
+{% load closet_tags %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Website{% endblock %}</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'bs/css/bootstrap.min.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Optional Bootstrap JavaScript and Popper.js for Bootstrap components to work -->
+     <script src="{% static 'bs/js/bootstrap.bundle.min.js' %}" defer></script>
+    {% block extra_js %} {% endblock %}
+    {% block extra_css %} {% endblock %}
+
+</head>
+<body>
+
+    <header class="bg-light mb-4">
+        <!-- Header content like a navigation bar goes here -->
+    </header>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'home' %}">Fashionize</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                {% block nav %}
+                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'dashboard:dashboard' username=request.user.username %}">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'closet:closet_list' username=request.user.username %}">My Closet</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'outfits:my_outfits' username=request.user.username %}">My Outfits</a>
+                    </li>
+                </ul>
+                {% endblock %}
+            </div>
+            <ul class="navbar-nav ml-auto">
+                <!-- 登出按钮 -->
+                <li class="nav-item">
+                        <a href="{% url 'manage_account' username=user.username %}" class="nav-link">Manage Account</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'logout' %}" class="nav-link btn btn-outline-danger">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+
+
+    <main class="container">
+        {% block content %}
+        <!-- Main content goes here -->
+        {% endblock %}
+    </main>
+
+    <div>
+        {% block sidebar_block %}
+        <!-- Sidebar content or additional tags go here -->
+        {% endblock %}
+    </div>
+
+    <footer class="bg-light text-center text-lg-start">
+        <div class="text-muted p-3">
+            © 2024 Group Project. All rights reserved.
+        </div>
+    </footer>
+</body>
+</html>
